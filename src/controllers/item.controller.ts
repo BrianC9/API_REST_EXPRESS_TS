@@ -17,12 +17,15 @@ const getItem = (req: Request, res: Response) => {
 
 
     } catch (error) {
-        handleHttpError(res, "ERROR_GET_ITEM",error)
+        handleHttpError(res, "ERROR_GET_ITEM", error)
     }
 }
 
 const createItem = (req: Request, res: Response) => {
     try {
+
+        const { body } = req
+        res.send(body)
 
     } catch (error) {
         handleHttpError(res, "ERROR_CREATE_ITEM")
