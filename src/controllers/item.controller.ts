@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import { handleHttpError } from "../utils/error.handle"
-import { findAllItems, findOneItem, insertItem } from "../services/item.service"
+import { deleteOneItem, findAllItems, findOneItem, insertItem, updateOneItem } from "../services/item.service"
 import { Company } from "../interfaces/company.interface"
+
 const getItems = async (req: Request, res: Response) => {
     try {
         const items = await findAllItems()
@@ -39,8 +40,14 @@ const createItem = async (req: Request, res: Response) => {
     }
 
 }
-const updateItem = (req: Request, res: Response) => {
+const updateItem = async (req: Request, res: Response) => {
     try {
+        const {id} = req.params
+        const {body} = req
+        console.log(body);
+        const item= await updateOneItem(id,body)
+        res.send(item)
+
 
     } catch (error) {
         handleHttpError(res, "ERROR_UPDATE_ITEM",error)
@@ -48,8 +55,12 @@ const updateItem = (req: Request, res: Response) => {
 
 }
 
-const deleteItem = (req: Request, res: Response) => {
+const deleteItem = async (req: Request, res: Response) => {
     try {
+        const {id} = req.params
+        const item = await deleteOneItem(id)
+        if (item === null) return res.status(404).send()
+        res.send(item)
 
     } catch (error) {
         handleHttpError(res, "ERROR_DELETE_ITEM",error)

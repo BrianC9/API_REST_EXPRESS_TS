@@ -20,4 +20,18 @@ const findOneItem = async (id:string) =>{
     return item
 }
 
-export { insertItem, findAllItems,findOneItem }
+const updateOneItem = async (id:string,data:Company) =>{
+    const item = await ItemModel.findOneAndUpdate({_id:id},data,{new:true})
+    return item
+}
+
+const deleteOneItem =async (id:string) => {
+    const item = await ItemModel.findOneAndDelete({_id:id})
+    console.log(item);
+    return item
+    
+}
+
+
+
+export { insertItem, findAllItems,findOneItem, updateOneItem, deleteOneItem }
