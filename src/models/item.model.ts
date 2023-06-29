@@ -3,32 +3,45 @@ import { Company } from "../interfaces/company.interface";
 
 const ItemSchema = new Schema<Company>({
     name: {
-        type:String,
-        required:true
+        type: String,
+        required: true,
+        lowercase: true
     },
-    size:{
-        type:Number,
-        min:1
+    size: {
+        type: Number,
+        min: 1,
+        required: true
+
     },
-    industry:{
-        type:String
+    industry: {
+        type: String,
+        required: true,
+        lowercase: true
+
     },
     location: {
-        type:String
+        type: String,
+        required: true,
+        lowercase: true
+
     },
     companyType: {
-        type:String,
-        enum: ["freelance", "society"]
+        type: String,
+        enum: ["freelance", "society"],
+        required: true,
+        lowercase: true
+
     },
-    nif:{
-        type:String,
-        required:false
+    nif: {
+        type: String,
+        required: false,
+        lowercase: true
     }
-},{
-    timestamps:true,
-    versionKey:false
+}, {
+    timestamps: true,
+    versionKey: false
 })
 
-const ItemModel = model("items",ItemSchema)
+const ItemModel = model("items", ItemSchema)
 
 export default ItemModel
