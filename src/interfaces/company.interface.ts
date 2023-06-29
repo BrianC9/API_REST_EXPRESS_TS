@@ -3,5 +3,6 @@ export interface Company {
     size: number,
     industry: string,
     location: string
-    companyType: "freelance" | "society"
+    companyType: "freelance" | "society",
+    nif?: string
 }
